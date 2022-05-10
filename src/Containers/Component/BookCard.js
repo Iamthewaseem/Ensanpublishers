@@ -7,10 +7,6 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import BedilVol2 from '../Assets/BedilVol2.jpg';
-import BedilVol3 from '../Assets/BedilVol3.jpg';
-import BedilVol1 from '../Assets/BedilVol1.jpg';
-import BedilVol4 from '../Assets/BedilVol4.jpg';
 import { useState, useEffect } from 'react';
 
 
