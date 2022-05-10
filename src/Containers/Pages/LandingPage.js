@@ -3,7 +3,6 @@ import Grid from '@material-ui/core/Grid';
 import { Box } from '@material-ui/core';
 import './Landing.css';
 import FlipImage from '../Component/FlipImage';
-import Vol4 from '../Assets/Vol4.jpg';
 import { makeStyles } from '@material-ui/core/styles';
 import Buy from '../Component/BuyButton';
 import BookCard from '../Component/BookCard';
