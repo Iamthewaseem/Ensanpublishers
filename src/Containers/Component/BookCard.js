@@ -11,6 +11,7 @@ import BedilVol2 from '../Assets/BedilVol2.jpg';
 import BedilVol3 from '../Assets/BedilVol3.jpg';
 import BedilVol1 from '../Assets/BedilVol1.jpg';
 import BedilVol4 from '../Assets/BedilVol4.jpg';
+import { useState, useEffect } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -91,91 +92,60 @@ const useStyles = makeStyles((theme) => ({
 //
 export default function AutoGrid() {
   const classes = useStyles();
+    const [books, setBooks] = useState([]);
+   
+    useEffect(() => {
+        // GET request using fetch inside useEffect React hook
+        fetchBooksData()
+    }, []);
+
+    const fetchBooksData = () =>{
+        fetch('/api/book', {
+            headers : { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+             }
+          })
+        .then(response => response.json())
+        .then(data =>{
+            console.log(data)
+            setBooks(data)
+        } );
+    } 
+            
+    const getBooksData = () => {
+      return(
+              books.map((data, index) => (
+                   <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
+                   <Card elevation={15} className={classes.resha}>
+                       <CardActionArea>
+                           <CardMedia
+                           component="img"
+                           alt="Bidel"
+                           image= {data.pr_image}
+                           title="BedilVol1"
+                           />
+                           <CardContent style={{display:'flex', justifyContent: 'center'}}>
+                           <Button size="medium" variant="contained" style={{backgroundColor: 'white'}} href="/Ensan_shinakhti_vol_one">
+                               <Typography  className={classes.button} gutterBottom variant="h5" component="h5">
+                               {data.edition}
+                               </Typography> 
+                           </Button>
+                           </CardContent>
+                       </CardActionArea>
+                   </Card>
+     
+               </Grid>
+     
+              ))
+      )
+  }
+    
   return (
     <div style={{ padding: '1em', paddingBottom: '4em'}}>
         <div style={{display: 'flex', justifyContent: 'center'}}>
         <Grid spacing={4} container xs={12} style={{display: 'flex', justifyContent: 'center', }}>
-        <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
-              <Card elevation={15} className={classes.resha}>
-                  <CardActionArea>
-                      <CardMedia
-                      component="img"
-                      alt="Bidel"
-                      image= {BedilVol1}
-                      title="BedilVol1"
-                      />
-                      <CardContent style={{display:'flex', justifyContent: 'center'}}>
-                      <Button size="medium" variant="contained" style={{backgroundColor: 'white'}} href="/Ensan_shinakhti_vol_one">
-                          <Typography  className={classes.button} gutterBottom variant="h5" component="h5">
-                          مجلد اول
-                          </Typography> 
-                      </Button>
-                      </CardContent>
-                  </CardActionArea>
-              </Card>
-
-          </Grid>
-
-          <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
-              <Card elevation={15} className={classes.resha}>
-                  <CardActionArea>
-                      <CardMedia
-                      component="img"
-                      alt="Bidel"
-                      image= {BedilVol2}
-                      title="BedilVol2"
-                      />
-                      <CardContent style={{display:'flex', justifyContent: 'center'}}>
-                        <Button size="medium" variant="contained" style={{backgroundColor: 'white'}} href="/Ensan_shinakhti_vol_two">
-                            <Typography  className={classes.button} gutterBottom variant="h5" component="h5">
-                            مجلد دوم
-                            </Typography> 
-                        </Button> 
-                      </CardContent>
-                  </CardActionArea>
-              </Card>
-          </Grid>
-
-
-          <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
-              <Card elevation={15} className={classes.resha}>
-                  <CardActionArea>
-                      <CardMedia
-                      component="img"
-                      alt="Bidel"
-                      image= {BedilVol3}
-                      title="BedilVol3"
-                      />
-                      <CardContent style={{display:'flex', justifyContent: 'center'}}>
-                        <Button size="medium" variant="contained" style={{backgroundColor: 'white'}} href="/Ensan_shinakhti_vol_three">
-                            <Typography  className={classes.button} gutterBottom variant="h5" component="h5">
-                            مجلد سوم
-                            </Typography> 
-                        </Button> 
-                      </CardContent>
-                  </CardActionArea>
-              </Card>
-          </Grid>
-
-          <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
-              <Card elevation={15} className={classes.resha}>
-                  <CardActionArea>
-                      <CardMedia
-                      component="img"
-                      alt="Bidel"
-                      image= {BedilVol4}
-                      title="BedilVol4"
-                      />
-                      <CardContent style={{display:'flex', justifyContent: 'center'}}>
-                        <Button size="medium" variant="contained" style={{backgroundColor: 'white'}} href="/Ensan_shinakhti_vol_four">
-                            <Typography  className={classes.button} gutterBottom variant="h5" component="h5">
-                            مجلد چهارم
-                            </Typography> 
-                        </Button> 
-                      </CardContent>
-                  </CardActionArea>
-              </Card>
-          </Grid>
+          {getBooksData()}
         </Grid>
       </div>
     </div>
