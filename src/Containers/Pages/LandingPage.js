@@ -223,8 +223,6 @@ const LandingPage = () => {
                             گالری کتاب‌ها
                     </p>
                     <BookGallery3/>
-                    <BookGallery2/>
-
                 </div>
             </div>                 
     )

@@ -11,6 +11,7 @@ import Ayeen2 from '../Assets/Ayeen2.jpg';
 import Daramadi2 from '../Assets/Daramadi2.jpg'
 import Didgah2 from '../Assets/Didgah2.jpg'
 import Erfan2 from '../Assets/Erfan2.jpg'
+import { useState, useEffect } from 'react';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -84,96 +85,53 @@ const useStyles = makeStyles((theme) => ({
 //
 export default function AutoGrid() {
   const classes = useStyles();
+  const [bookGallary, setBookGallary] = useState([]);
+   
+  useEffect(() => {
+      // GET request using fetch inside useEffect React hook
+      fetchBookGallaryData()
+  }, []);
+
+  const fetchBookGallaryData = () =>{
+      fetch('/api/book-gallery', {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        })
+      .then(response => response.json())
+      .then(data =>{
+          console.log(data)
+          setBookGallary(data)
+      } );
+  } 
+          
+  const getBookGalleryData = () => {
+    return(
+      bookGallary.map((data, index) => (
+              <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={4} lg={3}>
+              <Card elevation={5} className={classes.resha}>
+                      <CardMedia
+                      component="img"
+                      alt={data.title}
+                      image= {data.image}
+                      title="Ayeen"
+                      />
+              </Card>
+          </Grid>
+   
+            ))
+    )
+}
+  
   return (
     <div style={{ padding: '1em'}}>
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <Grid spacing={4} container xs={12} style={{display: 'flex', justifyContent: 'center', }}>
-            <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Ayeen}
-                        title="Ayeen"
-                        />
-                </Card>
-            </Grid>
-            <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Ayeen2}
-                        title="Ayeen2"
-                        />
-                </Card>
-            </Grid>
-            <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Daramadi}
-                        title="Daramadi"
-                        />
-                </Card>
-            </Grid>
-            <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Daramadi2}
-                        title="Daramadi2"
-                        />
-                </Card>
-            </Grid>
+          {getBookGalleryData()}           
             </Grid>
           </div>
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-          <Grid spacing={4} container xs={12} style={{display: 'flex', justifyContent: 'center', }}>
-          <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Didgah}
-                        title="Didgah"
-                        />
-                </Card>
-            </Grid>
-            <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Didgah2}
-                        title="Didgah2"
-                        />
-                </Card>
-            </Grid>
-            <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Erfan}
-                        title="Erfan"
-                        />
-                </Card>
-            </Grid>
-            <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={2}>
-                <Card elevation={5} className={classes.resha}>
-                        <CardMedia
-                        component="img"
-                        alt="Aks Ketab"
-                        image= {Erfan2}
-                        title="Erfan2"
-                        />
-                </Card>
-            </Grid>
-          </Grid>
-        </div>
+         
     </div>
   );
 }
