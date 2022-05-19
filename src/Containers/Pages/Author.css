@@ -68,3 +68,17 @@ strong{
 .custom-shape-divider-top-1651047448 .shape-fill {
     fill: #DBE2EF;
 }
+
+.paragraph > h1 {
+    margin: 0 !important
+}
+.paragraph {
+    font-family: 'vazir';
+    line-height: '2.4em';
+    text-align: 'justify';
+    font-size: '16px';
+    font-weight: 300;
+    padding: '0 3vw';
+    direction: 'ltr';
+    margin-bottom: '2em';
+}

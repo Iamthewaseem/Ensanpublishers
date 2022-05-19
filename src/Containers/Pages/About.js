@@ -11,9 +11,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     padding: '0.2em 2vw',
-    backgroundColor: '#fafafa !important',
     display: 'inline',
-    backround: '#fafafa ',
     overflow: 'hidden'
   },
   h1:{
@@ -71,7 +69,7 @@ export default function CenteredGrid() {
             ))}
         </div>
     )
-  }
+  } 
   return (
     <div style={{overflow: 'hidden', background: '#fafafa !important'}}>
       <div className='header'>
@@ -87,7 +85,7 @@ export default function CenteredGrid() {
         </div>
 
       </div>
-      <div style={{background: '#fafafa ', margin: '0'}}>
+      <div style={{margin: '0'}}>
           <Grid className={classes.gridSpace} container spacing={1}>
             <Grid item xs={12} sm={12} md={8} lg={8}>
             <Box                

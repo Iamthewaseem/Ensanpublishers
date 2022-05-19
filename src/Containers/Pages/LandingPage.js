@@ -14,7 +14,6 @@ import BuyNew from '../Component/BuyButtonNewTab';
 import { useState, useEffect } from 'react';
 import DOMPurify from "dompurify";
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -129,7 +128,7 @@ const LandingPage = () => {
                 <div>
                    {getBookText()}
                 </div>
-                <div className='filler'>
+                <div className='filler'> 
                     <p  className='title2'>
                      مجلد‌های موجود انسان‌شناختی
                     </p>
@@ -225,6 +224,7 @@ const LandingPage = () => {
                     </p>
                     <BookGallery3/>
                     <BookGallery2/>
+
                 </div>
             </div>                 
     )
