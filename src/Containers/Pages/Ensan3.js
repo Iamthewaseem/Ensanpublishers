@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Alert from '../Component/Alert';
 import FlipImage from '../Component/FlipImage'; 
 import { Box } from '@material-ui/core';
-import oneside from '../Assets/BedilVol3.jpg';
-import twoside from '../Assets/BedilVol32.jpg';
+import { useState, useEffect } from 'react';
+import DOMPurify from "dompurify";
 import Hidden from '@material-ui/core/Hidden';
 import BuyOptionMenu from '../Component/BuyOptionMenu3';
 
@@ -49,57 +49,79 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
 export default function CenteredGrid() {
   const classes = useStyles();
+  const [volThree, setVolThree] = useState([]);
+  useEffect(() => {
+      fetchBookGalleryData()
+  }, []);
+
+  const fetchBookGalleryData = () =>{
+      fetch('/api/book', {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        })
+      .then(response => response.json())
+      .then(data =>{
+        setVolThree(data)
+      } );
+  } 
+  const getEnsanVolThreeData = () => {
+    return (
+        <div>
+          <div className={classes.root}>
+          <Alert/>
+          <div>
+            <h1 className={classes.h1}>{volThree[2]?.title}</h1>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(volThree[2]?.body, { FORCE_BODY: true }) }} className={classes.para} />
+          </div>
+              <Grid className={classes.gridSpace} container spacing={2}>
+              <Grid item xs={12} sm={12} md={8} lg={6}>
+                  <p className={classes.para1}>
+                  علاقه‌مندان به‌هدف دریافت مجلد اول انسان‌شناختی بیدل به‌گزینه‌های ذیل مراجعه بفرمایند.
+                  </p>
+                  <Box
+                    display="inline"
+                    justifyContent="center"
+                    alignItems="center"
+                    margin="4vh 0"
+                  >
+                    <BuyOptionMenu/>
+                  </Box>
+                </Grid>
+                <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    margin="4vh 0"
+                  >
+                    <FlipImage aks={volThree[2]?.pr_image} text={volThree[2]?.title}/>                
+                  </Box>
+                </Grid>
+                <Hidden mdDown>
+                <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    margin="4vh 0"
+                  >
+                    <FlipImage aks={volThree[2]?.en_image} text={volThree[2]?.en_title}/>              
+                  </Box>
+                </Grid>
+                </Hidden>
+              </Grid>
+          </div>
+        </div>
+    )
+}
   return (
     <div>
-      <h1 className={classes.h1}>انسان‌شناختی بیدل مجلد سوم (بخش چهارم)</h1>
-      <div className={classes.root}>
-      <Alert/>
-      <div>
-        <p className={classes.para}>
-            مجلد سوم انسان‌شناختی بیدل، شناخت‌شناختی و روش‌شناختی او در 674 صفحه در سال
-            1395 / 2017 به‌چاپ رسیده است.
-        </p>
-      </div>
-          <Grid className={classes.gridSpace} container spacing={2}>
-            <Grid item xs={12} sm={12} md={8} lg={6}>
-              <p className={classes.para1}>
-              علاقه‌مندان به‌هدف دریافت مجلد سوم انسان‌شناختی بیدل به‌گزینه‌های ذیل مراجعه بفرمایند.
-              </p>
-              <Box
-                display="inline"
-                justifyContent="center"
-                alignItems="center"
-                margin="4vh 0"
-              >
-                <BuyOptionMenu/>
-              </Box>
-            </Grid>
-            <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                margin="4vh 0"
-              >
-                <FlipImage aks={oneside} text={"انسان شناختی بیدل مجلد سوم"}/>                
-              </Box>
-            </Grid>
-            <Hidden mdDown>
-            <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                margin="4vh 0"
-              >
-                <FlipImage aks={twoside} text={"Bidel's Anthropologie Vol. 3"}/>              
-              </Box>
-            </Grid>
-            </Hidden>
-          </Grid>
-      </div>
+      {getEnsanVolThreeData()}
     </div>
    );    
 }

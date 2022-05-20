@@ -3,13 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 export default function MultiActionAreaCard() {
   const [texts, setTexts] = useState([]);
   const fetchData =() => {
-      fetch('http://127.0.0.1:8000/api/about', {
+      fetch('/api/about', {
           headers : { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -17,7 +16,6 @@ export default function MultiActionAreaCard() {
         })
       .then(response => response.json())
       .then(data =>{
-          console.log(data)
           setTexts(data)
       } );
   }
@@ -30,7 +28,6 @@ export default function MultiActionAreaCard() {
         <div>
             {texts.map((data, index) => (
                 <Card elevation={6} sx={{ maxWidth: 345 }}>
-                  <CardActionArea>
                     <CardMedia
                       component="img"
                       height="auto"
@@ -38,14 +35,13 @@ export default function MultiActionAreaCard() {
                       alt="Elyas Kawish"
                     />
                     <CardContent>
-                      <Typography style={{fontFamily: 'nassim', textAlign: 'center', fontWeight: 1000, fontSize: '1.9em'}} gutterBottom variant="h5" component="div">
+                      <Typography  style={{fontFamily: 'nassim', textAlign: 'center', fontWeight: 1000, fontSize: '1.9em'}} gutterBottom variant="h5" component="div">
                         {data.ceo}
-                        </Typography>
-                        <Typography style={{fontFamily: 'nassim', textAlign: 'center', fontWeight: 800, fontSize: '1.2em'}} variant="body2" color="text.secondary">
+                      </Typography>
+                      <Typography style={{fontFamily: 'nassim', textAlign: 'center', fontWeight: 800, fontSize: '1.2em'}} variant="body2" color="text.secondary">
                         {data.position}
-                        </Typography>
+                      </Typography>
                     </CardContent>
-                  </CardActionArea>
                 </Card>
             ))}
         </div>

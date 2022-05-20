@@ -57,7 +57,7 @@ const LandingPage = () => {
             setTexts(data)
         } );
     }
-    const [book, setBook] = useState([]);
+    const [books, setBooks] = useState([]);
     const fetchPublishData =() => {
         fetch('/api/author-publishment', {
             headers : { 
@@ -68,19 +68,19 @@ const LandingPage = () => {
         .then(response => response.json())
         .then(data =>{
             console.log(data)
-            setBook(data)
+            setBooks(data)
         } );
     }
     useEffect(() => {
         // GET request using fetch inside useEffect React hook
-        fetchData()
         fetchPublishData()
+        fetchData()
+
     }, []);
     
     const getAuthorText = () => {
         return(
             <div style={{background: 'white!important'}}>
-                {texts.map((data, index) => (
                 <div> 
                     <div style={{background: 'white'}}>
                         <div class="custom-shape-divider-top-1651047448">
@@ -90,7 +90,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className='header2' style={{background: 'white'}}>
-                        <h1 style={{background: 'white'}} className={classes.header1}>{data.title}</h1>  
+                        <h1 style={{background: 'white'}} className={classes.header1}>{texts.title}</h1>  
                     </div>
                     <Box display="flex" container flexWrap="wrap" justifyContent="center" spacing={3}>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
@@ -105,26 +105,27 @@ const LandingPage = () => {
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={12}>
                             <div>
-                            <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(data.body, {FORCE_BODY: true})}} className={classes.paragraph} />
+                            <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(texts.body, {FORCE_BODY: true})}} className={classes.paragraph} />
                             </div>
                             <div>
                                 <BookCard/>
                             </div>
-                            {book.map((res, i)=>(
+                            {books.map((data, index) => (
                                 <div>
-                                <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(res.body, {FORCE_BODY: true})}} className={classes.paragraph} />
+                                    <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(data.body, {FORCE_BODY: true})}} className={classes.paragraph} />
                                 </div>
                             ))}
-               
                         </Grid>
                     </Box>
                 </div> 
-                ))}
             </div>
         )
     }
     return(
-        getAuthorText()
+        <div>
+        {getAuthorText()};
+        </div>
+     
     )
 };
 

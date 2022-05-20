@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import Alert from '../Component/Alert';
 import BookCard from '../Component/BookCardComplete';
 import BookGallery3 from '../Component/BookCardGallery3';
-import BookGallery2 from '../Component/BookCardGallery2';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -18,7 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
   h1:{
     fontFamily: 'titr',
-    padding: '0.2em 2em',
+    padding: '0.2em 3em',
+    marginBottom: '4vh',
     textAlign: 'center',
     fontSize: '2.6em',
     color: '#112D4E'
@@ -62,7 +62,6 @@ export default function CenteredGrid() {
                 از دیگر آثار چاپ‌شدۀ استاد دکتر سید نورالحق کاوش
                 </p>
                 <BookGallery3/>
-                <BookGallery2/>
             </Grid>
         </Grid>
       </div>

@@ -104,7 +104,6 @@ export default function AutoGrid() {
           })
         .then(response => response.json())
         .then(data =>{
-            console.log(data)
             setBooks(data)
         } );
     } 
@@ -113,24 +112,19 @@ export default function AutoGrid() {
       return(
               books.map((data, index) => (
                    <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
-                   <Card elevation={15} className={classes.resha}>
-                       <CardActionArea>
-                           <CardMedia
-                           component="img"
-                           alt="Bidel"
-                           image= {data.pr_image}
-                           title="BedilVol1"
-                           />
-                           <CardContent style={{display:'flex', justifyContent: 'center'}}>
-                           <Button size="medium" variant="contained" style={{backgroundColor: 'white'}} href="/Ensan_shinakhti_vol_one">
-                               <Typography  className={classes.button} gutterBottom variant="h5" component="h5">
-                               {data.edition}
-                               </Typography> 
-                           </Button>
-                           </CardContent>
-                       </CardActionArea>
-                   </Card>
-     
+                      <Card elevation={15} className={classes.resha}>
+                      <CardActionArea>
+                          <CardMedia
+                          component="img"
+                          alt="Bidel"
+                          image= {BedilVol3}
+                          title="BedilVol3"
+                          />
+                          <CardContent style={{display:'flex', justifyContent: 'center'}}>
+                          <BuyButton text="خرید مجلد سوم" link="/Volume3"/>
+                          </CardContent>
+                      </CardActionArea>
+                  </Card>
                </Grid>
      
               ))

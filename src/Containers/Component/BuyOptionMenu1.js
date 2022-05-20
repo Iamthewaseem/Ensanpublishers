@@ -11,10 +11,27 @@ import Avatar from '@mui/material/Avatar';
 import Ensan from '../Assets/ensan.jpg';
 import Amazon from '../Assets/Amazon.svg';
 import Paypal from '../Assets/PayPal.svg';
+import { useState, useEffect } from 'react';
 
 export default function ControlledAccordions() {
   const [expanded, setExpanded] = React.useState(false);
+  const [buyLink, setBuyLink] = useState([]);
+  useEffect(() => {
+    fetchPurchaseLink()
+  }, []);
 
+  const fetchPurchaseLink = () =>{
+      fetch('/api/book', {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        })
+      .then(response => response.json())
+      .then(data =>{
+        setBuyLink(data)
+      } );
+  } 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -40,7 +57,7 @@ export default function ControlledAccordions() {
                 alignItems="center"
                 padding="2vh 0"
                 >
-                 <BuyButton text="خرید" link="/Volume1"/> 
+                 <BuyButton text="" link={buyLink[0]?.web_link}/> 
                 </Box>
         </AccordionDetails>
       </Accordion>
@@ -64,7 +81,7 @@ export default function ControlledAccordions() {
                 alignItems="center"
                 padding="2vh 0"
                 >
-                    <BuyNew text="خرید" link="https://www.amazon.com/gp/offer-listing/B09ZD3C8SW"/> 
+                    <BuyNew text="خرید" link={buyLink[0]?.amazone_link}/> 
                 </Box>
         </AccordionDetails>
       </Accordion>
@@ -88,7 +105,7 @@ export default function ControlledAccordions() {
                 alignItems="center"
                 padding="2vh 0"
                 >
-                 <BuyNew text="خرید" link="https://paypal.me/ensanpublishers"/> 
+                 <BuyNew text="خرید" link={buyLink[0]?.paypal_link}/> 
                 </Box>
         </AccordionDetails>
       </Accordion>

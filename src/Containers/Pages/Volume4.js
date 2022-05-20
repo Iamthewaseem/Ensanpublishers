@@ -4,9 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ContactCard from '../Component/ContactCard';
 import { Box } from '@material-ui/core';
-import oneside from '../Assets/BedilVol4.jpg';
-import twoside from '../Assets/BedilVol41.jpg';
-// eslint-disable-next-line
+import { useState, useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +52,23 @@ gridSpace:{
 
 export default function CenteredGrid() {
   const classes = useStyles();
+  const [aks, setAks] = useState([]);
+  useEffect(() => {
+      fetchBookGalleryData()
+  }, []);
+
+  const fetchBookGalleryData = () =>{
+      fetch('/api/book', {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        })
+      .then(response => response.json())
+      .then(data =>{
+        setAks(data)
+      } );
+  } 
   return (
     <div className={classes.root}>
       <h1 className={classes.h1}>خریداری مجلد چهارم انسان‌شناختی بیدل</h1>
@@ -65,7 +80,7 @@ export default function CenteredGrid() {
                 alignItems="center"
                 padding="2vh 0"
               >
-                <img src={oneside} alt="kawish" height="auto" width="390vw" />
+                <img src={aks[3]?.pr_image} alt={aks[3]?.title} height="auto" width="390vw" />
               </Box>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -75,7 +90,7 @@ export default function CenteredGrid() {
                 alignItems="center"
                 padding="2vh 0"
               >
-                <img src={twoside} alt="kawish" height="auto" width="390vw" />
+                <img src={aks[3]?.en_image} alt={aks[3]?.title} height="auto" width="390vw" />
               </Box>
             </Grid>
           </Grid>

@@ -4,10 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import Alert from '../Component/Alert';
 import FlipImage from '../Component/FlipImage'; 
 import { Box } from '@material-ui/core';
-import oneside from '../Assets/BedilVol2.jpg';
-import twoside from '../Assets/BedilVol22.jpg';
 import BuyOptionMenu from '../Component/BuyOptionMenu2';
 import Hidden from '@material-ui/core/Hidden';
+import { useState, useEffect } from 'react';
+import DOMPurify from "dompurify";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,55 +51,76 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CenteredGrid() {
   const classes = useStyles();
+  const [volTwo, setVolTwo] = useState([]);
+  useEffect(() => {
+      fetchBookGalleryData()
+  }, []);
+
+  const fetchBookGalleryData = () =>{
+      fetch('/api/book', {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        })
+      .then(response => response.json())
+      .then(data =>{
+        setVolTwo(data)
+      } );
+  } 
+  const getEnsanVolTwoData = () => {
+    return (
+        <div>
+          <div className={classes.root}>
+          <Alert/>
+          <div>
+            <h1 className={classes.h1}>{volTwo[1]?.title}</h1>
+            <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(volTwo[1]?.body, { FORCE_BODY: true }) }} className={classes.para} />
+          </div>
+              <Grid className={classes.gridSpace} container spacing={2}>
+              <Grid item xs={12} sm={12} md={8} lg={6}>
+                  <p className={classes.para1}>
+                  علاقه‌مندان به‌هدف دریافت مجلد اول انسان‌شناختی بیدل به‌گزینه‌های ذیل مراجعه بفرمایند.
+                  </p>
+                  <Box
+                    display="inline"
+                    justifyContent="center"
+                    alignItems="center"
+                    margin="4vh 0"
+                  >
+                    <BuyOptionMenu/>
+                  </Box>
+                </Grid>
+                <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    margin="4vh 0"
+                  >
+                    <FlipImage aks={volTwo[1]?.pr_image} text={volTwo[1]?.title}/>                
+                  </Box>
+                </Grid>
+                <Hidden mdDown>
+                <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    margin="4vh 0"
+                  >
+                    <FlipImage aks={volTwo[1]?.en_image} text={volTwo[1]?.en_title}/>              
+                  </Box>
+                </Grid>
+                </Hidden>
+              </Grid>
+          </div>
+        </div>
+    )
+}
   return (
     <div>
-      <h1 className={classes.h1}>انسان‌شناختی بیدل مجلد دوم (بخش سوم)</h1>
-      <div className={classes.root}>
-      <Alert/>
-      <div>
-        <p  className={classes.para}>
-            مجلد دوم این اثر کلا حاوی پژوهش در هستی‌شناختی، جهان‌شناختی و انسان‌شناختی
-            بیدل است که در 582 صفحه در سال 1391/2013 به‌چاپ رسیده است.
-        </p>
-      </div>
-          <Grid className={classes.gridSpace} container spacing={2}>
-            <Grid item xs={12} sm={12} md={8} lg={6}>
-              <p className={classes.para1}>
-              علاقه‌مندان به‌هدف دریافت مجلد دوم انسان‌شناختی بیدل به‌گزینه‌های ذیل مراجعه بفرمایند.
-              </p>
-              <Box
-                display="inline"
-                justifyContent="center"
-                alignItems="center"
-                margin="4vh 0"
-              >
-                <BuyOptionMenu/>
-              </Box>
-            </Grid>
-            <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                margin="4vh 0"
-              >
-                <FlipImage aks={oneside} text={"انسان شناختی بیدل مجلد دوم"}/>                
-              </Box>
-            </Grid>
-            <Hidden mdDown>
-            <Grid style={{display: 'flex', justifyContent: 'center' }} item xs={12} sm={12} md={3} lg={3}>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                margin="4vh 0"
-              >
-                <FlipImage aks={twoside} text={"Bidel's Anthropologie Vol. 2"}/>              
-              </Box>
-            </Grid>
-            </Hidden>
-          </Grid>
-      </div>
+      {getEnsanVolTwoData()}
     </div>
    );    
 }

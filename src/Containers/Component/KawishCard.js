@@ -16,7 +16,6 @@ export default function MultiActionAreaCard() {
         })
       .then(response => response.json())
       .then(data =>{
-          console.log(data)
           setTexts(data)
       } );
   }
@@ -28,21 +27,19 @@ export default function MultiActionAreaCard() {
   const getAuthorPicture = () => {
       return(
           <div>
-              {texts.map((data, index) => (
               <Card elevation={6} sx={{ maxWidth: 345 }}>
                 <CardMedia
                   component="img"
                   height="400vh"
-                  image={data.image}
+                  image={texts.image}
                   alt="Noorul Haq Kawish"
                 />
                 <CardContent>
                     <Typography style={{fontFamily: 'nassim', textAlign: 'center', fontWeight: 1000, fontSize: '1.9em'}} gutterBottom variant="h5" component="div">
-                    {data.fullName}
+                    {texts.fullName}
                     </Typography>
                 </CardContent>
               </Card>
-              ))}
           </div>
       )
   }

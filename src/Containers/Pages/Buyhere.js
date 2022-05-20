@@ -4,8 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import './Amazon.css';
 import BuyBookCard from '../Component/BuyBookCard';
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

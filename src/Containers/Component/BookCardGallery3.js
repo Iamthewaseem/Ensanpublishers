@@ -3,14 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
-import Ayeen from '../Assets/AyeenZahidFront.jpg';
-import Daramadi from '../Assets/Daramadi.jpg'
-import Didgah from '../Assets/Didgah.jpg'
-import Erfan from '../Assets/Erfan.jpg'
-import Ayeen2 from '../Assets/Ayeen2.jpg';
-import Daramadi2 from '../Assets/Daramadi2.jpg'
-import Didgah2 from '../Assets/Didgah2.jpg'
-import Erfan2 from '../Assets/Erfan2.jpg'
 import { useState, useEffect } from 'react';
 
 
@@ -85,14 +77,12 @@ const useStyles = makeStyles((theme) => ({
 //
 export default function AutoGrid() {
   const classes = useStyles();
-  const [bookGallary, setBookGallary] = useState([]);
-   
+  const [bookGallery, setBookGallery] = useState([]);
   useEffect(() => {
-      // GET request using fetch inside useEffect React hook
-      fetchBookGallaryData()
+      fetchBookGalleryData()
   }, []);
 
-  const fetchBookGallaryData = () =>{
+  const fetchBookGalleryData = () =>{
       fetch('/api/book-gallery', {
           headers : { 
             'Content-Type': 'application/json',
@@ -101,37 +91,33 @@ export default function AutoGrid() {
         })
       .then(response => response.json())
       .then(data =>{
-          console.log(data)
-          setBookGallary(data)
+          setBookGallery(data)
       } );
   } 
           
   const getBookGalleryData = () => {
     return(
-      bookGallary.map((data, index) => (
-              <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={4} lg={3}>
-              <Card elevation={5} className={classes.resha}>
+      bookGallery.map((data, index) => (
+              <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={3} lg={3}>
+                <Card elevation={5} className={classes.resha}>
                       <CardMedia
                       component="img"
                       alt={data.title}
                       image= {data.image}
                       title="Ayeen"
                       />
-              </Card>
-          </Grid>
-   
+                </Card>
+              </Grid>
             ))
-    )
+          )
 }
-  
   return (
     <div style={{ padding: '1em'}}>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <Grid spacing={4} container xs={12} style={{display: 'flex', justifyContent: 'center', }}>
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Grid spacing={4} container xs={12} style={{display: 'flex', justifyContent: 'center' }}>
           {getBookGalleryData()}           
-            </Grid>
-          </div>
-         
+        </Grid>
+      </div>   
     </div>
   );
 }

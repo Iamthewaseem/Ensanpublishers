@@ -5,10 +5,7 @@ import {Typography } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import image1 from '../Assets/1.jpg';
-import image2 from '../Assets/2.jpg';
-import image3 from '../Assets/3.jpg';
-import image4 from '../Assets/4.jpg';
+import { useState, useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,68 +78,54 @@ const useStyles = makeStyles((theme) => ({
 //
 export default function AutoGrid() {
   const classes = useStyles();
+  const [books, setBooks] = useState([]);
+   
+  useEffect(() => {
+      // GET request using fetch inside useEffect React hook
+      fetchBooksData()
+  }, []);
+
+  const fetchBooksData = () =>{
+      fetch('/api/author-gallery', {
+          headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           }
+        })
+      .then(response => response.json())
+      .then(data =>{
+          setBooks(data)
+      } );
+  } 
+  const getBooksData = () => {
+    return(
+            books.map((data, index) => (
+
+                  <Grid item xs={12} sm={6} md={5} lg={5}>
+                    <Card>
+                      <CardMedia
+                      component="img"
+                      height= "400vh"
+                      image= {data.image}
+                      key={index}
+                      />
+                      <CardContent>
+                      <Typography  className={classes.cityname}  key={index} gutterBottom variant="h5" component="h5">
+                        {data.title}
+                    </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+            ))
+    )
+}
   return (
     <div style={{ padding: '1em', paddingBottom: '4em'}}>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+      <div style={{display: 'flex', justifyContent: 'center'}}>
         <Grid spacing={4} container xs={12} style={{display: 'flex', justifyContent: 'center', }}>
-        <Grid item xs={12} sm={6} md={5} lg={5}>
-            <Card>
-              <CardMedia
-              component="img"
-              height= "400vh"
-              image= {image1}
-              />
-              <CardContent>
-              <Typography  className={classes.cityname} gutterBottom variant="h5" component="h5">
-              استاد کاوش، پوهنتون کابل، افغانستان، 1363/1984
-              </Typography>
-              </CardContent>
-            </Card>
+          {getBooksData()}
         </Grid>
-        <Grid item xs={12} sm={6} md={5} lg={5}>
-            <Card>
-              <CardMedia
-              component="img"
-              height= "400vh"
-              image= {image2}
-              />
-              <CardContent>
-              <Typography  className={classes.cityname} gutterBottom variant="h5" component="h5">
-              استاد کاوش، کتاب‌خانۀ کانون فرهنگی حکیم ناصرخسرو بلخی، پلخمری، افغانستان، 1372/1993
-              </Typography>
-              </CardContent>
-            </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={5} lg={5}>
-            <Card>
-              <CardMedia
-              component="img"
-              height= "400vh"
-              image= {image3}
-              />
-              <CardContent>
-              <Typography  className={classes.cityname} gutterBottom variant="h5" component="h2">
-              استاد کاوش، ریاست کانون فرهنگی حکیم ناصرخسرو بلخی، پلخمری، افغانستان، 1372/1993
-              </Typography>
-              </CardContent>
-            </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={5} lg={5}>
-            <Card>
-              <CardMedia
-              component="img"
-              height= "400vh"
-              image= {image4}
-              />
-              <CardContent>
-              <Typography  className={classes.cityname} gutterBottom variant="h5" component="h2">
-              استاد کاوش، محفل دفاع دکترا، آکادمی علوم تاجیکستان، دوشنبه، تاجیکستان، 1377/1998
-              </Typography>
-              </CardContent>
-            </Card>
-        </Grid>
-      </Grid>
       </div>
-    </div>
+    </div> 
   );
 }

@@ -42,7 +42,7 @@ export default function CenteredGrid() {
   const classes = useStyles();
   const [texts, setTexts] = useState([]);
   const fetchData =() => {
-      fetch('http://127.0.0.1:8000/api/about', {
+      fetch('/api/about', {
           headers : { 
             'Content-Type': 'application/json',
             'Accept': 'application/json'
@@ -50,13 +50,10 @@ export default function CenteredGrid() {
         })
       .then(response => response.json())
       .then(data =>{
-          console.log(data)
           setTexts(data)
       } );
-  
   }
   useEffect(() => {
-      // GET request using fetch inside useEffect React hook
       fetchData()
   }, []);
   const getAboutText = () => {
@@ -64,7 +61,7 @@ export default function CenteredGrid() {
         <div>
             {texts.map((data, index) => (
               <div>
-                <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(data.body, {FORCE_BODY: true})}}  className={classes.para} />
+                <p dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(data.body, {FORCE_BODY: true})}}  key={index} className={classes.para} />
               </div>
             ))}
         </div>
@@ -88,13 +85,13 @@ export default function CenteredGrid() {
       <div style={{margin: '0'}}>
           <Grid className={classes.gridSpace} container spacing={1}>
             <Grid item xs={12} sm={12} md={8} lg={8}>
-            <Box                
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-              >
-              {getAboutText()}
-            </Box>
+              <Box                
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                {getAboutText()}
+              </Box>
             </Grid>
             <Grid item xs={12} sm={12} md={4} lg={4}>
               <Box                
