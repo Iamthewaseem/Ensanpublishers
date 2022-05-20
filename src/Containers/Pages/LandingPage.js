@@ -113,11 +113,11 @@ const LandingPage = () => {
                         <br />
                         <br />
                         <div style={{ marginRight: '5em', lineHeight: '3em' }}>
-                            <Buy link="/Volume4" text="خرید از انتشارات انسان" type="contained" />
+                            <Buy link={book.web_link} text=" از انتشارات انسان" type="contained" />
                             <br />
-                            <BuyNew link="https://www.amazon.com/dp/0578357828?ref=myi_title_dp" text="خرید از آمازون" type="contained" />
+                            <BuyNew  link={book.amazone_link} text="خرید از آمازون" type="contained" />
                             <br />
-                            <BuyNew link="https://www.paypal.com/paypalme/ensanpublishers" text="خرید از پی‌پال" type="contained" /></div>
+                            <BuyNew  link={book.paypal_link} text="خرید از پی‌پال" type="contained" /></div>
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={12} md={4} lg={4}>
@@ -170,7 +170,7 @@ const LandingPage = () => {
                                             marginRight: '2vw', 
                                             fontWeight: '1000' 
                                         }} 
-                                        href="/Author">بیشتر بخوانید...</a>
+                                        href="/Author">ادامه...</a>
                                 </span>
                         </Box>
                     </Grid>
@@ -214,7 +214,7 @@ const LandingPage = () => {
                                             marginRight: '2vw', 
                                             fontWeight: '1000' 
                                         }} 
-                                        href="/AboutUs">بیشتر بخوانید...
+                                        href="/AboutUs">ادامه...
                                     </a>
                                 </span>
                             </Box>

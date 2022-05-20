@@ -9,7 +9,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import { useState, useEffect } from 'react';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -111,22 +110,25 @@ export default function AutoGrid() {
     const getBooksData = () => {
       return(
               books.map((data, index) => (
-                   <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
-                      <Card elevation={15} className={classes.resha}>
-                      <CardActionArea>
-                          <CardMedia
-                          component="img"
-                          alt="Bidel"
-                          image= {BedilVol3}
-                          title="BedilVol3"
-                          />
-                          <CardContent style={{display:'flex', justifyContent: 'center'}}>
-                          <BuyButton text="خرید مجلد سوم" link="/Volume3"/>
-                          </CardContent>
-                      </CardActionArea>
-                  </Card>
-               </Grid>
-     
+              <Grid  style={{display: 'flex', justifyContent: 'center', }} item xs={12} sm={6} md={6} lg={2}>
+                <Card elevation={15} className={classes.resha}>
+                  <CardActionArea>
+                      <CardMedia
+                      component="img"
+                      alt="Bidel"
+                      image= {data.pr_image}
+                      title="BedilVol3"
+                      />
+                      <CardContent style={{display:'flex', justifyContent: 'center'}}>
+                      <Button size="medium" variant="contained" style={{backgroundColor: 'white'}} href={data.link}>
+                          <Typography  className={classes.button}>
+                            {data.edition}
+                        </Typography> 
+                      </Button>
+                      </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Grid>
               ))
       )
   }
