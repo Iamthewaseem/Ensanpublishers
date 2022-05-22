@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const form = useRef();  
-  const { register, errors, handleSubmit } = useForm();
+  const { register, errors } = useForm();
   const Swal = require('sweetalert2')
   const Toast = Swal.mixin({
     toast: true,
@@ -55,11 +55,10 @@ export default function SignUp() {
       toast.addEventListener('mouseleave', Swal.resumeTimer)
     }
   })
-  const onSubmit = (data, event) => {
-    event.preventDefault();
+  const sendEmail = (e) => {
+    e.preventDefault();
     
     emailjs.sendForm('service_8fow9lg', 'Contact', form.current, 'xi7-WnVPounMRePRq')
-    // emailjs.sendForm('service_t9iih4j', 'Contact', form.current, 'erfixir-OJPouYs8M')
       .then((result) => {
         Toast.fire({
           icon: 'success',
@@ -71,7 +70,7 @@ export default function SignUp() {
           title: `<p style={{fontFamily: 'vazir', textAlign: 'justify', fontSize: '11px'}}>لطفاً دوباره کوشش کنید.</p>`
         })
       });
-      event.target.reset();
+      e.target.reset();
   }
   return (
     <Container id={'form'} component="main" maxWidth="xs">
@@ -82,8 +81,7 @@ export default function SignUp() {
             <div>فورم تماس</div>
         </div>
         </Typography>
-        {/* <form ref={form} onSubmit={sendEmail} className={classes.form} noValidate> */}
-        <form ref={form} onSubmit={handleSubmit(onSubmit)} className={classes.form} noValidate>
+        <form ref={form} onSubmit={sendEmail} className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
