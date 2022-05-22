@@ -76,7 +76,10 @@ import BuyNew from '../Component/BuyButtonNewTab';
 //         picture: {Rohe}
 //     },
 // ]
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of eb5aa31 (Few new changes)
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -88,6 +91,7 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-evenly',
         flexDirection: 'row'
 <<<<<<< HEAD
+<<<<<<< HEAD
     },
     para: {
         fontFamily: 'vazir',
@@ -96,11 +100,14 @@ const useStyles = makeStyles((theme) => ({
         lineHeight: '3em'
 =======
 >>>>>>> parent of eb5aa31 (Few new changes)
+=======
+>>>>>>> parent of eb5aa31 (Few new changes)
     }
 }));
 
 const LandingPage = () => {
     const classes = useStyles();
+<<<<<<< HEAD
 <<<<<<< HEAD
     const [texts, setTexts] = useState([]);
     const [book, setBook] = useState([]);
@@ -224,6 +231,8 @@ const LandingPage = () => {
                         <path d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z" class="shape-fill"></path>
                     </svg>
 =======
+=======
+>>>>>>> parent of eb5aa31 (Few new changes)
     // const GetCovers = (props) => {
     //     return BooksPhotos.map(({ title, picture }) => {
     //         return (
@@ -268,6 +277,9 @@ const LandingPage = () => {
                             و علاقه‌مندان بیدل‌شناختی آکادمیک
                         </p>
                     </div>
+<<<<<<< HEAD
+>>>>>>> parent of eb5aa31 (Few new changes)
+=======
 >>>>>>> parent of eb5aa31 (Few new changes)
                 </div>
             </div>
