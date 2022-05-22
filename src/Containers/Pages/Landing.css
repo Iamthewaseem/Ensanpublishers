@@ -56,6 +56,7 @@
     margin: 1em 0 2em 0;
     text-align: center;
 }
+<<<<<<< HEAD
 .para, .para>p, .para>h1{
     /* font-size: "clamp('1.5rem, 2vw, 5rem !important')" ; */
     font-size: 1.9vw!important;
@@ -68,6 +69,18 @@
     margin: 0 !important;
     text-shadow: 2px 2px #ffffff !important;
     font-weight: 300 !important;
+=======
+.para{
+    font-size: clamp(1.5rem, 2vw, 5rem);
+    line-height: clamp(2rem, 4vw, 5rem);
+    font-family: vazir;
+    text-align: center;
+    direction: rtl;
+    color: #112D4E;
+    padding: 0!important;
+    margin: 0!important;
+    text-shadow: 2px 2px #ffffff;
+>>>>>>> parent of eb5aa31 (Few new changes)
 }
 
 @media screen and (max-width:320px) {

@@ -18,11 +18,12 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
-    "@tinymce/tinymce-react": "^4.0.0",
-    "axios": "^0.27.2",
     "date-fns": "^2.19.0",
+<<<<<<< HEAD
     "dompurify": "^2.3.6",
     "http-proxy-middleware": "^2.0.6",
+=======
+>>>>>>> parent of eb5aa31 (Few new changes)
     "jss": "^10.9.0",
     "jss-rtl": "^0.3.0",
     "markdown-to-jsx": "^7.1.2",

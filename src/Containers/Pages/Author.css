@@ -6,8 +6,13 @@ p{
     margin: 0 2vw 0 2vw;
     font-family: 'vazir';
     font-size: large;
+<<<<<<< HEAD
 } 
 header1{
+=======
+}
+h1{
+>>>>>>> parent of eb5aa31 (Few new changes)
     font-size: 1.3rem;
 }
 .list{

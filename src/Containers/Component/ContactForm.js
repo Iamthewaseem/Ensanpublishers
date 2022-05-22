@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 import emailjs from '@emailjs/browser';
 import Button from '@mui/material/Button';
 import './Style.css';
-// eslint-disable-next-line
 import Swal from 'sweetalert2'
 
 const useStyles = makeStyles((theme) => ({
